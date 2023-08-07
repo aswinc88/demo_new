@@ -17,7 +17,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: draft the release
-        uses: release-drafter/release-drafter@main
+        uses: demo_new/release-drafter@main
         with:
           publish: true
           config-name: release-drafter.yml
