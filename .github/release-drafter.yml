@@ -1,46 +1,78 @@
-name-template: 'v$RESOLVED_VERSION'
-tag-template: '$RESOLVED_VERSION'
-version-template: '$MAJOR.$MINOR.$PATCH'
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
 version-resolver:
   major:
     labels:
-    - 'major'
+      - 'major'
   minor:
     labels:
-    - 'minor'
-    - 'enhancement'
+      - 'minor'
   patch:
     labels:
-    - 'auto-update'
-    - 'patch'
-    - 'fix'
-    - 'bugfix'
-    - 'bug'
-    - 'hotfix'
-    - 'no-release'
-  default: 'minor'
-
+      - 'patch'
+  default: patch
 categories:
-- title: '🚀 Enhancements'
-  labels:
-  - 'enhancement'
-  - 'patch'
-- title: '🐛 Bug Fixes'
-  labels:
-  - 'fix'
-  - 'bugfix'
-  - 'bug'
-  - 'hotfix'
-- title: '🤖 Automatic Updates'
-  labels:
-  - 'auto-update'
-
-change-template: |
-  <details>
-    <summary>$TITLE @$AUTHOR (#$NUMBER)</summary>
-
-    $BODY
-  </details>
-
+  - title: '⚠️ Breaking changes'
+    labels:
+      - 'breaking change'
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'bug'
+  - title: '📃 Documents'
+    labels:
+      - 'docs'
+  - title: '🧩 Dependency Updates'
+    labels:
+      - 'deps'
+      - 'dependencies'
+      - 'bump'
+      - 'chore'
+    collapse-after: 5
+  - title: '🔬 Others'
+    labels:
+      - 'style'
+      - 'refactor'
+      - 'test'
+      - 'ci'
+    collapse-after: 5
+autolabeler:
+  - label: 'breaking change'
+    title:
+      - '/!:/i'
+  - label: 'feature'
+    title:
+      - '/feat:/i'
+  - label: 'bug'
+    title:
+      - '/fix:/i'
+  - label: 'style'
+    title:
+      - '/style:/i'
+  - label: 'refactor'
+    title:
+      - '/refactor:/i'
+  - label: 'test'
+    title:
+      - '/test:/i'
+  - label: 'chore'
+    title:
+      - '/chore:/i'
+  - label: 'docs'
+    title:
+      - '/docs:/i'
+  - label: 'ci'
+    title:
+      - '/ci:/i'
+  - label: 'dependencies'
+    title:
+      - '/deps:/i'
+      - '/dependencies:/i'
+      - '/bump:/i'
+commitish: main
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&'
 template: |
   $CHANGES
