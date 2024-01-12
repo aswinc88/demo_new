@@ -1,24 +1,22 @@
-name: Parent Workflow
+name: Trigger Workflow
 
 on:
   push:
     branches:
-      - main
+      - main # Change to your main branch or default branch
 
 jobs:
-  trigger_job:
+  trigger:
     runs-on: ubuntu-latest
-    
-    steps:
 
-      - name: Echo parent workflow
-        shell: bash
-        run: |
-            echo "THis is parent repo workflow"
-      - name: Trigger child repo workflow           
-        curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.AUTH_TOKEN }}" \
-          -H "Accept: application/vnd.github.everest-preview+json" \
-          -H "Content-Type: application/json" \
-          https://api.github.com/repos/aswinc88/testrepo/dispatches \
-          -d '{"event_type": "trigger-workflow"}'
+    steps:
+      - name: Trigger Workflow
+        uses: actions/http-client@v2
+        with:
+          method: POST
+          url: https://api.github.com/repos/aswinc88/testrepo/dispatches
+          headers: |
+            Authorization: Bearer ${{ secrets.AUTH_TOKEN }}
+            Accept: application/vnd.github.everest-preview+json
+            Content-Type: application/json
+          data: '{"event_type": "trigger-workflow"}'
