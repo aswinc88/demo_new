@@ -17,8 +17,8 @@ jobs:
             echo "THis is parent repo workflow"
       - name: Trigger child repo workflow           
         curl -X POST \
-        -H "Authorization: Bearer ${{ secrets.AUTH_TOKEN }}" \
-        -H "Accept: application/vnd.github.everest-preview+json" \
-        -H "Content-Type: application/json" \
-        https://api.github.com/repos/aswinc88/testrepo/dispatches \
-        -d '{"event_type": "trigger-workflow"}'
+          -H "Authorization: Bearer ${{ secrets.AUTH_TOKEN }}" \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Content-Type: application/json" \
+          https://api.github.com/repos/aswinc88/testrepo/dispatches \
+          -d '{"event_type": "trigger-workflow"}'
