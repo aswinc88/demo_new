@@ -15,4 +15,15 @@ jobs:
         shell: bash
         run: |
             echo "THis is parent repo workflow"
-        
+      - name: Trigger child repo workflow
+        uses: convictional/trigger-workflow-and-wait@1.6.1
+        with:
+            owner: aswinc88
+            repo: testrepo
+            github_token: ${{ secrets.AUTH_TOKEN }}
+            workflow_file_name: child_job_trigger.yml
+            ref: main
+            wait_interval: 10
+            propagate_failure: true
+            trigger_workflow: true
+            wait_workflow: true
